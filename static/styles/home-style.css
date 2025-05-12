@@ -1,0 +1,184 @@
+.container {
+    color: white;
+}
+
+body {
+    background: #e6d7f5;
+    font-family: Arial, sans-serif;
+}
+
+.body {
+    background: #e6d7f5;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.chat-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.sidebar {
+    width: 320px;
+    background: #8364e8;
+    padding: 15px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+.sidebar h4 {
+    width: 100%;
+}
+
+#clear-history {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    flex-grow: 1;
+    overflow-y: auto;
+    max-height: 70vh;
+}
+
+.sidebar-item {
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    margin-bottom: 5px;
+    text-align: center;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.sidebar-item:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.sidebar button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.sidebar button:hover {
+    opacity: 0.8;
+}
+
+.chat-box {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    padding: 20px;
+    overflow-y: auto;
+    height: 100vh;
+    box-sizing: border-box;
+}
+.messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-right: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.message {
+    padding: 10px 15px;
+    border-radius: 15px;
+    margin: 8px 0;
+    max-width: 75%;
+    display: inline-block;
+}
+
+.user-message {
+    background: #8364e8;
+    color: white;
+    align-self: flex-end;
+    text-align: right;
+}
+
+.bot-message {
+    background: #f1f1f1;
+    color: black;
+    align-self: flex-start;
+}
+
+/* Ввод */
+.input-container {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    background: #fff;
+}
+
+.input-container input {
+    flex: 1;
+    border: none;
+    padding: 10px;
+    border-radius: 20px;
+    outline: none;
+    font-size: 16px;
+}
+
+.send-btn {
+    background: #8364e8;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 50%;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.history-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.history-title {
+    color: white;
+    margin-right: 10px;
+}
+
+.clear-history-btn {
+    background: #2c2c2c;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.clear-history-btn:hover {
+    background: #444;
+}
+
+.clear-history-btn i {
+    font-size: 16px;
+}

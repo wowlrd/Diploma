@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+
+{% load static %}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chat - ZiyatLab</title>
+    <link rel="stylesheet" href="{% static 'styles/home-style.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+
+<style>
+    .body {
+        background: #e6d7f5;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .chat-container {
+        display: flex;
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+    }
+    
+    .sidebar {
+        width: 320px; 
+        background: #8364e8;
+        padding: 15px;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        height: 92vh;
+        box-sizing: border-box;
+        align-items: center;
+    }
+    
+    .sidebar h4 {
+        width: 40px;
+    }
+    
+    #clear-history {
+        width: 40px;
+        padding: 12px;
+        font-size: 18px;
+        text-align: center;
+    }
+    
+    .sidebar ul {
+        list-style: none;
+        padding: 0;
+        width: 100%;
+        flex-grow: 1;
+        overflow-y: auto;
+        max-height: 70vh;
+    }
+    
+    .sidebar-item {
+        padding: 12px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        margin-bottom: 5px;
+        text-align: center;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+    
+    .sidebar-item:hover {
+        background: rgba(255, 255, 255, 0.3);
+    }
+    
+    .sidebar button {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    
+    .sidebar button:hover {
+        opacity: 0.8;
+    }
+    
+    .chat-box {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        background: white;
+        padding: 20px;
+        overflow-y: auto;
+        height: 95vh;
+        width: 250px;
+        box-sizing: border-box;
+    }
+    
+    .messages {
+        flex-grow: 1;
+        overflow-y: auto;
+        padding-right: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .message {
+        padding: 10px 15px;
+        border-radius: 15px;
+        margin: 8px 0;
+        max-width: 75%;
+        display: inline-block;
+    }
+    
+    .user-message {
+        background: #8364e8;
+        color: white;
+        align-self: flex-end;
+        text-align: right;
+    }
+    
+    .bot-message {
+        background: #f1f1f1;
+        color: black;
+        align-self: flex-start;
+    }
+    
+    .input-container {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        border-top: 1px solid #ccc;
+        background: #fff;
+    }
+    
+    .input-container input {
+        flex: 1;
+        border: none;
+        padding: 10px;
+        border-radius: 20px;
+        outline: none;
+        font-size: 16px;
+    }
+    
+    .send-btn {
+        background: #8364e8;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 50%;
+        margin-left: 10px;
+        cursor: pointer;
+    }
+    
+    .history-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between; /* "History" слева, кнопка справа */
+        margin-bottom: 10px;
+        padding: 5px 10px;
+        font-size: 25px;
+        font-weight: bold;
+        width: 100%;
+    }
+    
+    .history-title {
+        color: white;
+        margin: 0;
+        flex-grow: 1;
+        text-align: left;
+    }
+    
+    .clear-history-btn {
+        background: #2c2c2c;
+        color: white;
+        border: none;
+        width: 32px;  /* Квадратная кнопка */
+        height: 32px; /* Высота равна ширине */
+        font-size: 14px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .clear-history-btn:hover {
+        background: #444;
+    }
+    
+    .clear-history-btn i {
+        font-size: 16px;
+    }
+    
+    .sidebar-item {
+        padding: 12px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        margin-bottom: 5px;
+        text-align: center;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+    
+    .sidebar-item:hover {
+        background: rgba(255, 255, 255, 0.3);
+    }
+
+    .button-toggle {
+        display: flex;
+        background: #6C4AB6;
+        border-radius: 30px;
+        width: 200px;
+        padding: 4px;
+    }
+    
+    .button-toggle .btn {
+        flex: 1;
+        border: none;
+        background: transparent;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 30px;
+        transition: background 0.3s, color 0.3s;
+        font-weight: bold;
+    }
+    
+    .button-toggle .btn.active {
+        background: #ddd;
+        color: black;
+    }
+
+    .button-toggle .btn:hover {
+        background: #ddd;
+        color: black;
+    }
+
+    .navbar {
+        background: #8364e8;
+        width: 100%;
+        padding: 15px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 10;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .navbar .logo {
+        font-size: 22px;
+        font-weight: bold;
+        color: white;
+        display: flex;
+        align-items: center;
+    }
+    
+    .navbar a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; transition: color 0.2s ease;}
+    .navbar a:hover { text-decoration: none; color: #E6E6FA;}
+
+    .navbar .dropdown-menu {
+      background-color: #7B4AE2;
+      border: none;
+      border-radius: 8px;
+      overflow: hidden;  
+      padding: 0;             
+    }
+    
+    .navbar .dropdown-header {
+      color: white;
+      background-color: #7B4AE2;
+      {% comment %} padding: 0.75rem 1rem; {% endcomment %}
+      font-size: 1rem;
+      font-weight: bold;
+      margin: 0;               
+    }
+    
+    .navbar .dropdown-item {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+      margin-left:0px;
+    }
+    .navbar .dropdown-menu {
+      padding: 0;       
+    }
+    .navbar .dropdown-item {
+      padding: 0.5rem 1rem; 
+    }
+    .navbar .dropdown-item:hover {
+      margin-left:0px;
+      background-color: rgba(255, 255, 255, 0.15);
+      color: white;
+      width:100%;
+      text-decoration: none;
+    }
+
+    
+    .chat-container {
+        padding-top: 60px;
+    }
+
+    #back-to-chat {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    
+    
+    
+</style>
+
+<body>
+
+    <div id="chat-data" style="display: none;">{{ data_json|safe }}</div>
+
+    <div class="navbar">
+        <a href="{% url 'main' %}" class="logo" style="text-decoration: none;">Ziyat LAB</a>
+        <div>
+            <a href="{% url 'about' %}">ABOUT</a>
+            <a href="{% url 'home' %}">QUIZ</a>
+            <a href="{% url 'user' %}">USER</a>
+            {% comment %} <a href="#language">LANGUAGE</a> {% endcomment %}
+            <div class="dropdown d-inline-block">
+                <a
+                  class="dropdown-toggle"
+                  href="#"
+                  id="contactDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  CONTACT US
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="contactDropdown">
+                  <li><a class="dropdown-item" href="https://t.me/yilingpatriarchy" target="_blank">Telegram</a></li>
+                  <li><a class="dropdown-item" href="tel:+7778111000">+7 (778) 111-000</a></li>
+                  <li><a class="dropdown-item" href="mailto: 210103105@stu.sdu.edu.kz&body=Здравствуйте! Пиши из сайта...">contact@ziyatlab.kz</a></li>
+                </ul>
+              </div>
+        </div>
+    </div>
+
+    <div class="chat-container">
+         <div class="sidebar">
+            <div class="history-header">
+                <span class="history-title">History</span>
+                <form method="POST" action="{% url 'home' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="clear_history" value="1"> <!-- Скрытое поле -->
+                    <button type="submit" class="btn btn-dark clear-history-btn">
+                        <i class="fa fa-trash-o"></i>
+                    </button>
+                </form>
+            </div>
+
+            <ul class="list-unstyled sidebar-history">
+                {% for content in data %}
+                    <li class="sidebar-item" onclick="showChatHistory('{{ content.prompt }}', '{{ content.output }}')">
+                        {{ content.prompt }}
+                    </li>
+                {% endfor %}
+            </ul>
+        
+            
+<form method="POST" action="{% url 'home' %}" class="quiz-start-form mb-3 d-flex align-items-center" style="gap:8px;">
+    {% csrf_token %}
+    
+    <label for="subject" class="text-white mb-0">Subject:</label>
+    <select name="subject" id="subject" class="form-select" style="width:150px;">
+      <option value="all">All Subjects</option>
+      <option value="math">Mathematics</option>
+      <option value="physics">Physics</option>
+      <option value="informatics">Informatics</option>
+    </select>
+  
+    <input type="hidden" name="prompt" value="quiz">
+  </form>
+              <div class="button-toggle">
+                <form method="POST" action="{% url 'home' %}" style="flex:1;margin-right:2px;">
+                  {% csrf_token %}
+                  <input type="hidden" name="prompt" value="quiz">
+                  <button type="submit" class="btn btn-light w-100 text-center">
+                    Quiz
+                  </button>
+                </form>
+                <a href="{% url 'grades' %}" class="btn btn-light w-100 {% if grades_active %}active{% endif %}" style="flex:1;text-align:center;">
+                  Grades
+                </a>
+              </div>
+        </div>
+
+
+        <div class="chat-box">
+
+            <button id="back-to-chat" class="btn btn-outline-secondary mb-3" style="display: none; align-self: flex-start;" onclick="showMainChat()">
+                ← Back
+            </button>
+
+            <div class="messages">
+                {% for content in data %}
+                <div class="message user-message">{{ content.prompt }}</div>
+                <div class="message bot-message" style="white-space: pre-line;">{{ content.output }}</div>
+                {% endfor %}
+            </div>
+    
+            <div class="input-container">
+                <form method="POST" id="prompt-form" class="d-flex w-100">
+                    {% csrf_token %}
+                    <input type="text" name="prompt" placeholder="Type here...">
+                    <button type="submit" class="send-btn">➤</button>
+                </form>
+            </div>
+        </div>
+    
+       
+        
+    
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,491 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ZiyatLab</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+
+  <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+    }
+    .top-section {
+      background: rgba(255, 255, 255, 0.1);
+      color: black;
+      width: 100%;
+      padding: 50px 0;
+      display: flex;
+      flex-direction: column;
+      {% comment %} align-items: flex-start; {% endcomment %}
+      justify-content: center;
+      text-align: center;
+      {% comment %} padding-left: 4%; {% endcomment %}
+      padding-bottom: 1%;
+        }
+    .motivational {
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+    .features {
+      background: #fff;
+      padding: 40px 15px;
+    }
+    .feature-card {
+      border: none;
+      text-align: center;
+      padding: 20px;
+      transition: transform .2s;
+      border-radius: 8px;
+    }
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    }
+    .feature-card .fa {
+      font-size: 36px;
+      color: #6C4AB6;
+      margin-bottom: 15px;
+    }
+    .feature-card h5 {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .feature-card p {
+      color: #555;
+      font-size: 0.95rem;
+    }
+    .bottom-section {
+        background: #E6E6FA;
+        width: 100%;
+        padding: 60px 0;
+      }
+    
+      .chat-launcher {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    
+      .chat-circle {
+        width: 140px;
+        height: 140px; 
+        background: #fff;
+        border-radius: 50%;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: transform 0.2s;
+      }
+    
+      .chat-circle:hover {
+        transform: scale(1.05);
+      }
+    
+      .chat-circle img {
+        width: 60%;    
+      }
+    
+      .chat-label {
+        margin-top: 12px;     
+        font-size: 1.25rem; 
+        color: #3D155F;
+        font-weight: bold;
+        font-family: Arial, sans-serif;
+      }
+    .navbar {
+      background:
+      linear-gradient(135deg, #6C4AB6, #6C4AB6),
+      rgba(255, 255, 255, 0.2);
+      width: 100%;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: absolute;
+      top: 0; left: 0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    .navbar a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; transition: color 0.2s ease;}
+    .navbar a:hover { text-decoration: none; color: #E6E6FA;}
+
+    .navbar .dropdown-menu {
+      background-color: #7B4AE2;
+      border: none;
+      border-radius: 8px;
+      overflow: hidden;  
+      padding: 0;             
+    }
+    
+    .navbar .dropdown-header {
+      color: white;
+      background-color: #7B4AE2;
+      {% comment %} padding: 0.75rem 1rem; {% endcomment %}
+      font-size: 1rem;
+      font-weight: bold;
+      margin: 0;               
+    }
+    
+    .navbar .dropdown-item {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+      margin-left:0px;
+    }
+    .navbar .dropdown-menu {
+      padding: 0;       
+    }
+    .navbar .dropdown-item {
+      padding: 0.5rem 1rem; 
+    }
+    .navbar .dropdown-item:hover {
+      margin-left:0px;
+      background-color: rgba(255, 255, 255, 0.15);
+      color: white;
+      width:100%;
+      text-decoration: none;
+    }
+
+    .ziyatlab {
+        position: relative;
+        background: url("{% static 'images/bg.png' %}") center/cover no-repeat;
+      }
+      .ziyatlab .overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+      }
+      .ziyatlab .container {
+        position: relative;
+        z-index: 1;
+      }
+      .ziyatlab .card-body {
+        background: rgba(255, 255, 255, 0.1);
+      }
+      .ziyatlab h2,
+      .ziyatlab h5,
+      .ziyatlab p {
+        color: #fff;
+      }
+      .ziyatlab i {
+        opacity: 0.85;
+      }
+      .study-buddy {
+        font-family: 'Fredoka One', cursive;
+        color: #FFFFFF;
+        background: rgba(255,255,255,0.2);
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+      }
+      .study-buddy h5 {
+        font-size: 1.75rem;
+        margin-bottom: 0.75rem;
+        letter-spacing: 1px;
+      }
+      .study-buddy p {
+        font-size: 1.1rem;
+        line-height: 1.5;
+      }
+      .study-buddy-card {
+        background: linear-gradient(135deg, #A48EFF, #D1C2FF);
+        border-radius: 1rem;
+        padding: 2rem;
+        color: #fff;
+        font-family: 'Fredoka One', cursive;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      }
+      .study-buddy-card .card-title {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+        letter-spacing: 1px;
+      }
+      .study-buddy-card .study-feature {
+        flex: 1;
+        padding: 0 1rem;
+      }
+      .study-buddy-card .study-feature i {
+        font-size: 2.5rem;
+        margin-bottom: 0.75rem;
+      }
+      .study-buddy-card .study-feature h5 {
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+      }
+      .study-buddy-card .study-feature p {
+        font-size: 1rem;
+        line-height: 1.4;
+      }
+   .features-2 {
+     background: #f8f4ff;
+     padding: 4rem 0;
+   }
+   
+   /* Mockup styling */
+   .features-2 .app-mockup {
+     max-width: 70%;
+     border-radius: 0.5rem;
+     box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+   }
+   
+   /* Make parent relative so absolute coords work */
+   .features-2 .features-right {
+     position: relative;
+     margin-left:50px;
+   }
+   
+   /* Base bubble styling */
+   .features-2 .feature-box {
+     position: absolute;
+     background: #7B4AE2;
+     color: #fff;
+     padding: 0.75rem 1.25rem;
+     border-radius: 0.5rem;
+     font-size: 1rem;
+     display: flex;
+     align-items: center;
+     width: 60%;
+     max-width: 260px;
+     transition: background 0.3s;
+     margin-left:50px;
+   }
+   .features-2 .feature-box i {
+     font-size: 1.2rem;
+   }
+   
+   /* Individual positions */
+   .features-2 .feature-1 {
+     top: 10px;
+     left: -20px;
+   }
+   .features-2 .feature-2 {
+     top: 140px;
+     left: -20px;
+   }
+   .features-2 .feature-3 {
+     top: 270px;
+     left: -20px;
+   }
+
+   
+   /* Hover state */
+   .features-2 .feature-box:hover {
+     background: #5a2e91;
+   }
+   
+   /* Left column CTA button */
+   .features-2 .btn-primary {
+     background: #7B4AE2;
+     border: none;
+     padding: 0.75rem 1.5rem;
+     font-size: 1.1rem;
+     border-radius: 0.5rem;
+     transition: background 0.3s;
+   }
+   .features-2 .btn-primary:hover {
+     background: #6132b5;
+   }
+   
+   .brand-name {
+    color: #7B4AE2;      /* your signature purple */
+    font-weight: bold;   /* make it stand out */
+  }
+
+  .site-footer {
+    background: linear-gradient(135deg, #6C4AB6, #3D155F);
+    color: #fff;
+    padding: 20px 0;
+    font-size: 0.9rem;
+    margin-top: 20px;
+  }
+  
+  .site-footer p {
+    margin: 0;
+    padding-bottom: 8px;
+  }
+  
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const quotes = [
+        "Білегіңе сенбе, біліміңе сен.",
+        "Кісінің көркі киім емес — білім.",
+        "Білек бірді, білім мыңды жығады.",
+        "Оқу — бiлiм бұлағы, бiлiм — өмiр шырағы.",
+        "Білімнің басы — бейнет, соңы — зейнет.",
+        "Жердің сәні — егін, ердің сәні — білім.",
+        "Алтын алма, білім ал.",
+        "Білімді бесіктен тесікке дейін ізден.",
+        "Білім арзан, білу қымбат.",
+        "Күш — білімде, білім — кітапта."
+      ];
+      document.getElementById("motivational-quote").textContent =
+        quotes[Math.floor(Math.random() * quotes.length)];
+    });
+  </script>
+</head>
+<body>
+  <div class="navbar">
+    <div class="logo" style="font-size:20px;font-weight:bold;color:white;margin-left:20px;">Ziyat LAB</div>
+    <div>
+      <a href="{% url 'about' %}">ABOUT</a>
+      <a href="{% url 'grades' %}">GRADES</a>
+      <a href="{% url 'user' %}">USER</a>
+      {% comment %} <a href="#language">LANGUAGE</a> {% endcomment %}
+      <div class="dropdown d-inline-block">
+        <a
+          class="dropdown-toggle"
+          href="#"
+          id="contactDropdown"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          CONTACT US
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="contactDropdown">
+          <li><a class="dropdown-item" href="https://t.me/yilingpatriarchy" target="_blank"><i class="fa-brands fa-telegram"></i>Telegram</a></li>
+          <li><a class="dropdown-item" href="tel:+7778111000">+7 (778) 111-000</a></li>
+          <li><a class="dropdown-item" href="mailto: 210103105@stu.sdu.edu.kz&body=Здравствуйте! Пиши из сайта...">contact@ziyatlab.kz</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="top-section">
+    <h1 style="margin-top:20px;font-weight:bold;">Let's start, {{ user.username }}! 🎓</h1>
+    <p class="motivational" id="motivational-quote"></p>
+    {% comment %} <button id="choose-subjects" class="btn btn-outline-light">Choose your subjects</button> {% endcomment %}
+    <!-- modal markup omitted for brevity -->
+  </div>
+
+  <section class="ziyatlab py-5 text-white">
+    <div class="overlay"></div>
+    <div class="container position-relative">
+      <div class="card bg-transparent border-0">
+        <div class="card-body study-buddy-card">  
+            <div class="text-center flex-fill px-8 study-buddy">
+                <i class="fa fa-graduation-cap fa-2x mb-2 text-light"></i>
+                <h5>Your 24/7 Study Buddy</h5>
+                <p>No more waiting for office hours or group sessions—get instant, on-demand help on any UNT topic whenever you need it, wherever you are!</p>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features-2 py-5">
+    <div class="container">
+      <div class="row align-items-center">
+        <!-- Left column: heading + copy + CTA -->
+        <div class="col-md-5 mb-4 mb-md-0">
+          <h2 class="mb-4">
+            Reduce stress and save time with 
+            <span class="brand-name">ZiyatLAB</span>
+          </h2>
+          <p class="mb-4">
+            We did more than just build a chatbot — we gave you a
+            <strong>FREE smart study partner</strong> that guides you step-by-step,
+            times each question, and never repeats itself!
+          </p>
+          <a href="{% url 'home' %}" class="btn btn-primary btn-lg">
+            Go to Chat
+          </a>
+        </div>
+  
+        <!-- Right column: mockup + three bubbles -->
+        <div class="col-md-6 features-right position-relative text-center">
+          <img
+            src="{% static 'images/mockup1.png' %}"
+            alt="App preview"
+            class="img-fluid app-mockup mb-3"
+          >
+  
+          <div class="feature-box feature-1">
+            <i class="fa fa-clock-o me-2"></i>
+            Practice to real UNT
+          </div>
+          <div class="feature-box feature-2">
+            <i class="fa fa-infinity me-2"></i>
+            Current questions 2025
+          </div>
+          <div class="feature-box feature-3">
+            <i class="fa fa-star me-2"></i>
+            Free & no paywalls
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+  <section class="features">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card feature-card h-100">
+            <i class="fa fa-bolt"></i>
+            <h5>Instant Answers</h5>
+            <p>We implemented semantic search plus GPT fallback so you always get fast, relevant replies.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card feature-card h-100">
+            <i class="fa fa-question-circle"></i>
+            <h5>Interactive Quiz</h5>
+            <p>Timed questions, no repeats, and step-by-step explanations help you practice at your own pace.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card feature-card h-100">
+            <i class="fa fa-chart-line"></i>
+            <h5>Track Progress</h5>
+            <p>Built-in Grades page shows your history in a table and chart so you can spot improvement trends.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  
+
+  {% comment %} <div class="bottom-section d-flex justify-content-center align-items-center">
+    <div class="chat-launcher" onclick="location.href='{% url 'home' %}'">
+      <div class="chat-circle">
+        <img src="https://cdn-icons-png.flaticon.com/512/1380/1380338.png" alt="Chat Icon">
+      </div>
+      <div class="chat-label">Go to Chat</div>
+    </div> {% endcomment %}
+  
+  </div> 
+
+  <footer class="site-footer">
+    <div class="container text-center">
+      <p>© 2025 ZiyatLAB. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="{% static 'js/script.js' %}"></script>
+
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+
+{% load static %}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ZiyatLab - Quiz</title>
+    <link rel="stylesheet" href="{% static 'styles/home-style.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="chat-data" style="display: none;">{{ data_json|safe }}</div>
+
+    <button id="back-to-chat" class="btn btn-light mt-3 w-100" onclick="location.href='{% url 'home' %}'">
+        ⬅ Back to Chat
+    </button>
+
+    <div class="chat-container">
+        <div class="sidebar">
+            <div class="history-header">
+                <span class="history-title">History</span>
+                <form method="POST" action="{% url 'quiz' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="clear_history" value="1">
+                    <button type="submit" class="btn btn-dark clear-history-btn">
+                        <i class="fa fa-trash-o"></i>
+                    </button>
+                </form>
+            </div>
+            <ul class="list-unstyled sidebar-history">
+                {% for content in data %}
+                    <li class="sidebar-item" onclick="showChatHistory('{{ content.prompt }}', '{{ content.output }}')">
+                        {{ content.prompt }}
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <div class="button-toggle">
+                <a href="{% url 'quiz' %}" class="btn btn-light w-100 text-center">Quiz</a>
+                <a href="{% url 'grades' %}" class="btn btn-dark w-100 text-center">Grades</a>
+            </div>
+        </div>
+
+        <div class="chat-box">
+            <div class="messages">
+                {% for content in data %}
+                <div class="message user-message">{{ content.prompt }}</div>
+                <div class="message bot-message" style="white-space: pre-line;">{{ content.output }}</div>
+                {% endfor %}
+            </div>
+
+            <div class="input-container">
+                <form method="POST" id="prompt-form" class="d-flex w-100">
+                    {% csrf_token %}
+                    <input type="text" name="prompt" placeholder="Type your answer... (A, B, C or D)">
+                    <button type="submit" class="send-btn">➔</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

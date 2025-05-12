@@ -1,0 +1,300 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - ZiyatLAB</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+        }
+        .top-section {
+            margin-top: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            width: 100%;
+            padding: 30px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .bottom-section {
+            background: #E6E6FA;
+            width: 100%;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-top: 30px;
+        }
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        .profile-name {
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 20px;
+        }
+        .profile-btn {
+            background: rgba(255, 255, 255, 0.8);
+            color: #3D155F;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            margin: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 400px;
+        }
+        .profile-btn:hover {
+            background: #fff;
+        }
+        .logout-btn {
+            background: rgba(255, 255, 255, 0.5);
+            color: #3D155F;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            background: #ddd;
+        }
+        .logout-btn:hover {
+            background: #fff;
+        }
+
+        a.logout-btn-2 {
+            text-decoration: none; 
+            color: #3D155F; 
+            display: inline-block; 
+            background: #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: center;
+        }
+        
+        a.logout-btn-2:hover {
+            background: #fff;
+            color: #3D155F;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.3);
+            padding: 10px 20px;
+            border-radius: 8px;
+            position: absolute;
+            top: 30px;
+            left: 20px;
+            transition: 0.3s;
+        }
+        
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .navbar {
+            background:
+            linear-gradient(135deg, #6C4AB6, #6C4AB6),
+            rgba(255, 255, 255, 0.2);
+            width: 100%;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: absolute;
+            top: 0; left: 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+          }
+          .navbar a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; transition: color 0.2s ease;}
+          .navbar a:hover { text-decoration: none; color: #E6E6FA;}
+      
+          .navbar .dropdown-menu {
+            background-color: #7B4AE2;
+            border: none;
+            border-radius: 8px;
+            overflow: hidden;  
+            padding: 0;             
+          }
+          
+          .navbar .dropdown-header {
+            color: white;
+            background-color: #7B4AE2;
+            {% comment %} padding: 0.75rem 1rem; {% endcomment %}
+            font-size: 1rem;
+            font-weight: bold;
+            margin: 0;               
+          }
+          
+          .navbar .dropdown-item {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            margin-left:0px;
+          }
+          .navbar .dropdown-menu {
+            padding: 0;       
+          }
+          .navbar .dropdown-item {
+            padding: 0.5rem 1rem; 
+          }
+          .navbar .dropdown-item:hover {
+            margin-left:0px;
+            background-color: rgba(255, 255, 255, 0.15);
+            color: white;
+            width:100%;
+            text-decoration: none;
+          }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: #ddd; /* fallback color */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+          }
+          .profile-pic .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+          
+          .footer {
+            width: 100%;
+            background-color: #6C4AB6; 
+            color: white;
+            padding: 20px 0;
+            margin-top: 40px;
+            box-sizing: border-box;
+
+            .footer .container-fluid {
+              padding-left: 0;
+              padding-right: 0;
+            }
+          }
+          .footer a {
+            color: #fff;
+            margin: 0 10px;
+            text-decoration: none;
+            font-weight: bold;
+          }
+          .footer a:hover {
+            color: #ddd;
+          }
+          .footer .social-icon {
+            margin: 0 5px;
+            color: #E6E6FA;
+          }
+          .footer .social-icon:hover {
+            color: #fff;
+          }
+
+    </style>
+</head>
+<body class="d-flex flex-column" style="min-height:100vh;">
+
+    <div class="navbar">
+        <a href="{% url 'main' %}" class="logo" style="text-decoration: none;">Ziyat LAB</a>
+        <div class="nav-links">
+            <a href="{% url 'about' %}">ABOUT</a>
+            <a href="{% url 'main' %}">MAIN</a>
+            <a href="{% url 'home' %}">CHAT</a>
+            <a href="{% url 'grades' %}">GRADES</a>
+            <div class="dropdown d-inline-block">
+                <a
+                  class="dropdown-toggle"
+                  href="#"
+                  id="contactDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  CONTACT US
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="contactDropdown">
+                  <li><a class="dropdown-item" href="https://t.me/yilingpatriarchy" target="_blank"><i class="fa-brands fa-telegram"></i>Telegram</a></li>
+                  <li><a class="dropdown-item" href="tel:+7778111000">+7 (778) 111-000</a></li>
+                  <li><a class="dropdown-item" href="mailto: 210103105@stu.sdu.edu.kz&body=Здравствуйте! Пиши из сайта...">contact@ziyatlab.kz</a></li>
+                </ul>
+              </div>
+        </div>
+    </div>
+
+    <div class="top-section">
+        <h1 style="color:black;">Profile</h1>
+    </div>
+
+    <div class="bottom-section">
+        <div class="profile-pic">
+            <img 
+              src="{% static 'images/indira.jpg' %}" 
+              alt="{{ user.username }}’s Profile" 
+              class="profile-img"
+            >
+          </div>
+        <div class="profile-name">{{ user.username }}</div>
+
+        <div class="container py-1" style="max-width:600px;">
+
+            <div class="text-center mb-4">
+              <p class="text-muted">{{ user.email }}</p>
+            </div>
+          
+            <div class="card mb-4">
+              <div class="card-body text-center">
+                <h5 class="card-title" style="font-weight:bold;">Your Quiz stats</h5>
+                <p>Total quizzes taken: <strong>{{ total_quizzes }}</strong></p>
+                <p>Average score: <strong>{{ average_score }}%</strong></p>
+                <p>Best score: <strong>{{ best_score }}%</strong></p>
+              </div>
+            </div>
+
+        <button class="profile-btn"><a href="{% url 'grades' %}" class="grades-btn-2" style="color: #3D155F; border-radius: 8px; display: inline-block; text-decoration: none;">See grades</a></button>
+        <button class="profile-btn"><a href="{% url 'password_change' %}" class="grades-btn-2" style="color: #3D155F; border-radius: 8px; display: inline-block; text-decoration: none;">Change Password</a></button>
+        <button class="profile-btn"><a href="{% url 'logout' %}" class="grades-btn-2" style="color: #3D155F; border-radius: 8px; display: inline-block; text-decoration: none;">Log Out</a></button>
+  
+          </div>
+        <footer class="footer">
+          <div class="container-fluid">
+            <p class="mb-1">© 2025 ZiyatLAB. All rights reserved.</p>
+          </div>
+        </footer>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'styles/login-style.css' %}" />
+    <title>Register</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <form class="mx-auto" method="POST" id="register-form">
+            {% csrf_token %}
+
+            <h4 class="text-center">Register</h4>
+
+            {% if messages %}
+                <div class="alert alert-danger">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <div class="mb-3 mt-5">
+                <label for="username" class="form-label">User Name</label>
+                <input class="form-control" name="username" id="username" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" name="email" class="form-control" id="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" name="password" class="form-control" id="password" required>
+            </div>
+
+            <button type="submit" name="register" class="btn btn-primary mt-3">Register</button>
+            <a href="{% url 'login' %}" class="btn btn-primary mt-3">Back to Login</a>
+        </form>
+    </div>
+</body>
+</html>
